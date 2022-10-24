@@ -6,9 +6,51 @@ public class Rover extends Actor
 
     public void act() 
     {
-
+     //System.out.println(Welt());
+     printWelt();
     } 
-
+    
+    
+    public void printWelt(){
+     String[][] toPrint = new String[10][10];
+     toPrint = Welt();
+     for(int i = 0; i < 10; i++){
+            for(int j = 0; j <10; j++){
+                System.out.print(toPrint[i][j]);
+            }
+            System.out.println("");
+        }
+    }
+    
+    public void findPath() {
+        
+    }
+    
+    public String[][] Welt() {
+        
+        String[][] welt = new String[10][10];
+        
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j <10; j++){
+                welt[i][j] = getCell(j,i);
+            }
+        }
+        return welt;
+    }
+    
+    public String getCell(int x, int y) {
+        int rx = getX() ;
+        int ry = getY() ;
+        int px = x - rx;
+        int py = y - ry;
+        String number = "0";
+        if(getOneObjectAtOffset(px,py,Huegel.class)!=null){ //Huegel = 2
+            number = "2";
+        }else if(getOneObjectAtOffset(px,py,Gestein.class)!=null){ //Gestein = 1
+            number = "1";
+        }
+        return number;
+    }
 
     /**
      * Der Rover bewegt sich ein Feld in Fahrtrichtung weiter.
@@ -41,8 +83,8 @@ public class Rover extends Actor
     }
 
     /**
-     * Der Rover dreht sich um 90 Grad in die Richtung, die mit richtung („links“ oder „rechts“) übergeben wurde.
-     * Sollte ein anderer Text (String) als "rechts" oder "links" übergeben werden, dann erscheint eine entsprechende Meldung auf dem Display.
+     * Der Rover dreht sich um 90 Grad in die Richtung, die mit richtung (ï¿½linksï¿½ oder ï¿½rechtsï¿½) ï¿½bergeben wurde.
+     * Sollte ein anderer Text (String) als "rechts" oder "links" ï¿½bergeben werden, dann erscheint eine entsprechende Meldung auf dem Display.
      */
     public void drehe(String richtung)
     {
@@ -61,7 +103,7 @@ public class Rover extends Actor
     }
 
     /**
-     * Der Rover gibt durch einen Wahrheitswert (true oder false )zurück, ob sich auf seiner Position ein Objekt der Klasse Gestein befindet.
+     * Der Rover gibt durch einen Wahrheitswert (true oder false )zurï¿½ck, ob sich auf seiner Position ein Objekt der Klasse Gestein befindet.
      * Eine entsprechende Meldung erscheint auch auf dem Display.
      */
     public boolean gesteinVorhanden()
@@ -77,9 +119,9 @@ public class Rover extends Actor
     }
 
     /**
-     * Der Rover überprüft, ob sich in richtung ("rechts", "links", oder "vorne") ein Objekt der Klasse Huegel befindet.
+     * Der Rover ï¿½berprï¿½ft, ob sich in richtung ("rechts", "links", oder "vorne") ein Objekt der Klasse Huegel befindet.
      * Das Ergebnis wird auf dem Display angezeigt.
-     * Sollte ein anderer Text (String) als "rechts", "links" oder "vorne" übergeben werden, dann erscheint eine entsprechende Meldung auf dem Display.
+     * Sollte ein anderer Text (String) als "rechts", "links" oder "vorne" ï¿½bergeben werden, dann erscheint eine entsprechende Meldung auf dem Display.
      */
     public boolean huegelVorhanden(String richtung)
     {
@@ -146,7 +188,7 @@ public class Rover extends Actor
     }
 
     /**
-     * Der Rover erzeugt ein Objekt der Klasse „Markierung“ auf seiner Position.
+     * Der Rover erzeugt ein Objekt der Klasse ï¿½Markierungï¿½ auf seiner Position.
      */
     public void setzeMarke()
     {
@@ -154,7 +196,7 @@ public class Rover extends Actor
     }
 
     /**
-     * *Der Rover gibt durch einen Wahrheitswert (true oder false )zurück, ob sich auf seiner Position ein Objekt der Marke befindet.
+     * *Der Rover gibt durch einen Wahrheitswert (true oder false )zurï¿½ck, ob sich auf seiner Position ein Objekt der Marke befindet.
      * Eine entsprechende Meldung erscheint auch auf dem Display.
      */
     public boolean markeVorhanden()
@@ -213,7 +255,7 @@ public class Rover extends Actor
 
         public Display()
         {
-          bild = getImage();
+            bild = getImage();
         }
 
         public void act() 
@@ -223,8 +265,8 @@ public class Rover extends Actor
 
         public void anzeigen(String pText)
         {
-           loeschen();
-           getImage().drawImage(new GreenfootImage(pText, 25, Color.BLACK, new Color(0, 0, 0, 0)),10,10);
+            loeschen();
+            getImage().drawImage(new GreenfootImage(pText, 25, Color.BLACK, new Color(0, 0, 0, 0)),10,10);
 
         }
 
