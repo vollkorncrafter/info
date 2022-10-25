@@ -1,30 +1,14 @@
-/**
- * Write a description of class BFS here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class BFS  
-{
-    // instance variables - replace the example below with your own
-    private int x;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import greenfoot.*;
 
-    /**
-     * Constructor for objects of class BFS
-     */
-    public BFS()
-    {
-    }
 
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
+public class BFS extends Actor {
+  public static void find(String[][] World) {
+      
+      for(int i = 0; i < 100; i++){
+          
+      }
+  }
 }

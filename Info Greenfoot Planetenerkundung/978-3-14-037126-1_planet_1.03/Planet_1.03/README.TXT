@@ -1,5 +1,5 @@
-A simple scenario inspired by Karel The Robot and modified by Thomas Kempe & David Tepaße
+A simple scenario inspired by Karel The Robot and modified by Thomas Kempe & David Tepaï¿½e
 
-In diesem Szenario kšnnen verschiedene Roboter (Unterklassen von Roboter) erzeugt werden.
-Mit Hilfe einiger Sensoren kšnnen diese Roboter auch komplexe Aufgaben erledigen.
-Die Roboter kšnnen zudem Akkus aufnehmen und Schrauben ablegen.
+In diesem Szenario kï¿½nnen verschiedene Roboter (Unterklassen von Roboter) erzeugt werden.
+Mit Hilfe einiger Sensoren kï¿½nnen diese Roboter auch komplexe Aufgaben erledigen.
+Die Roboter kï¿½nnen zudem Akkus aufnehmen und Schrauben ablegen.

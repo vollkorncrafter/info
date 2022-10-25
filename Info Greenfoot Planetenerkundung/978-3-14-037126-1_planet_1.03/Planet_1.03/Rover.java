@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.ArrayList;
 
 public class Rover extends Actor
 {
@@ -8,14 +9,18 @@ public class Rover extends Actor
     {
      //System.out.println(Welt());
      printWelt();
+     Cell ZELLE = new Cell();
+     Cell[] dummy = {};
+     ArrayList<String> ok = new ArrayList<String>();
+     ZELLE.update(getX(),getY(),dummy,0,ok);
+     System.out.println(ZELLE.UUID);
     } 
-    
-    
+
     public void printWelt(){
      String[][] toPrint = new String[10][10];
      toPrint = Welt();
      for(int i = 0; i < 10; i++){
-            for(int j = 0; j <10; j++){
+            for(int j = 0; j <10; j++) {
                 System.out.print(toPrint[i][j]);
             }
             System.out.println("");
@@ -35,6 +40,7 @@ public class Rover extends Actor
                 welt[i][j] = getCell(j,i);
             }
         }
+        welt[getY()][getX()] = "S";
         return welt;
     }
     
@@ -43,11 +49,12 @@ public class Rover extends Actor
         int ry = getY() ;
         int px = x - rx;
         int py = y - ry;
-        String number = "0";
+        String number = "1";
         if(getOneObjectAtOffset(px,py,Huegel.class)!=null){ //Huegel = 2
-            number = "2";
+            number = "0";
         }else if(getOneObjectAtOffset(px,py,Gestein.class)!=null){ //Gestein = 1
-            number = "1";
+            //number = "1";
+            number = "D";
         }
         return number;
     }

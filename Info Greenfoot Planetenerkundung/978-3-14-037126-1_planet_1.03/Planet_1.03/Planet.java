@@ -76,5 +76,7 @@ public class Planet extends World
         addObject(huegel22,12,3);
         removeObject(huegel15);
         removeObject(huegel22);
+        Gestein gestein = new Gestein();
+        addObject(gestein,8,4);
     }
 }

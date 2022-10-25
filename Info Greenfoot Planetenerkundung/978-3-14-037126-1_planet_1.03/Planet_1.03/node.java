@@ -1,12 +1,14 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
 /**
  * Write a description of class node here.
  * 
- * @author Oskar Schulz 
+ * @author (your name) 
  * @version (a version number or a date)
  */
-public class node  
+public class node extends Actor
 {
-    int x;
+        int x;
 	int y;
 	int distanceFromSource;
 
