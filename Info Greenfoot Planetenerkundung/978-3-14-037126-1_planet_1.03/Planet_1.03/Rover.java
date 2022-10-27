@@ -5,58 +5,194 @@ public class Rover extends Actor
 {
     private Display anzeige;
 
-    public void act() 
+    
+    
+    
+    
+    public String fahrEntscheidung(int[] c){
+        String richtung = "";
+        if(c[0] > getX()){
+            richtung = "rechts";
+        }else if(c[0] <getX()){
+            richtung = "links";
+        }else if(c[1] > getY()){
+            richtung = "unten";
+        }else if(c[1] < getY()){
+            richtung = "oben";
+        }
+        
+        
+        
+        return richtung;
+    }
+    
+    
+    public void fahreNach(String richtung)
     {
-     //System.out.println(Welt());
-     printWelt();
-     Cell ZELLE = new Cell();
-     Cell[] dummy = {};
-     ArrayList<String> ok = new ArrayList<String>();
-     ZELLE.update(getX(),getY(),dummy,0,ok);
-     System.out.println(ZELLE.UUID);
+            //setRotation(getRotation()+90);
+        if(richtung == "links") {
+            setRotation(180); 
+            fahre();
+        }
+        if(richtung == "rechts") {
+            setRotation(0); 
+            fahre();
+        }
+        if(richtung == "unten") {
+            setRotation(90); 
+            fahre();
+        }
+        if(richtung == "oben") {
+            setRotation(270); 
+            fahre();
+        }
+    }
+    
+    
+    public ArrayList<int[]> driveTo(int zielX, int zielY) 
+    {
+        ArrayList<Cell> open = new ArrayList<Cell>();
+        ArrayList<Cell> closed = new ArrayList<Cell>();
+        ArrayList<Cell> parents = new ArrayList<Cell>();
+        ArrayList<int[]> notloesung = new ArrayList<int[]>();
+        boolean[][] walkable = Welt();
+        Cell first = new Cell();
+        first.setCoords(getX(),getY());
+        open.add(first);
+
+        int maxX = 9;
+        int maxY = 9;
+        
+        int live = 100;
+        
+        ArrayList<int[]> way = new ArrayList<int[]>();
+        
+        
+        while(open.size() > 0){
+            int lowest = 10000;
+            int index = 0;
+            boolean moeglich = false;
+            Cell q = new Cell();
+            for(int n = 0;n < open.size(); n++){
+                if(open.get(n).getF() < lowest){
+                    q = open.get(n);
+                    lowest = q.getF();
+                    index = n;
+                    if(q.it == live){
+                        open.remove(n);
+                        System.out.println("ohje");
+                    }
+                }
+            }
+            open.remove(index);
+            System.out.println(q.getUID());
+            parents = q.getParents();
+            parents.add(q);
+            if(q.getX() == zielX && q.getY() == zielY){
+                System.out.println("found");
+                for(int i=0; i < q.getParents().size(); i++) {
+                    int x =q.getParents().get(i).getX();
+                    int y =q.getParents().get(i).getY();
+                    System.out.println(x + " " + y);
+                    int[] xy = {x,y};
+                    way.add(xy);
+                    
+                    fahreNach(fahrEntscheidung(xy));
+                }
+                return way;
+            }
+
+            if(!(q.getY()+1 > maxY)){
+                if(walkable[q.getX()][q.getY()+1]){
+                    Cell OBEN = new Cell();
+                    OBEN.setCoords(q.getX(),q.getY()+1);
+                    OBEN.set(1,(Math.abs(OBEN.getX() - zielX)+Math.abs(OBEN.getY() - zielY)));
+                    OBEN.setParents(parents);
+                    OBEN.it = q.it + 1;
+                    if(checkUID.check(OBEN)){
+                        open.add(OBEN);
+                        moeglich = true;
+                    }
+
+                }
+            }
+
+            if(q.getY()-1 > 0){
+                if(walkable[q.getX()][q.getY()-1]){
+                    Cell UNTEN = new Cell();
+                    UNTEN.setCoords(q.getX(),q.getY()-1);
+                    UNTEN.set(1,(Math.abs(UNTEN.getX() - zielX)+Math.abs(UNTEN.getY() - zielY)));
+                    UNTEN.setParents(parents);
+                    UNTEN.it = q.it + 1;
+                    if(checkUID.check(UNTEN)){
+                        open.add(UNTEN);
+                        moeglich = true;
+                    }
+                }
+            }
+
+            if(!(q.getX()+1 > maxX)){
+                if(walkable[q.getX()+1][q.getY()]){
+                    Cell RECHTS = new Cell();
+                    RECHTS.setCoords(q.getX()+1,q.getY());
+                    RECHTS.set(1,(Math.abs(RECHTS.getX() - zielX)+Math.abs(RECHTS.getY() - zielY)));
+                    RECHTS.setParents(parents);
+                    RECHTS.it = q.it + 1;
+                    if(checkUID.check(RECHTS)){
+                        open.add(RECHTS);
+                        moeglich = true;
+                    }
+                }
+            }
+
+            if(q.getX()-1 > 0){
+                if(walkable[q.getX()-1][q.getY()]){
+                    Cell LINKS = new Cell();
+                    LINKS.setCoords(q.getX()-1,q.getY());
+                    LINKS.set(1,(Math.abs(LINKS.getX() - zielX)+Math.abs(LINKS.getY() - zielY)));
+                    LINKS.setParents(parents);
+                    LINKS.it = q.it + 1;
+                    if(checkUID.check(LINKS)){
+                        open.add(LINKS);
+                        moeglich = true;
+                    }
+                }
+            }
+            
+            if(!moeglich){
+                open.remove(q);
+            }
+
+        }
+        return notloesung;
     } 
 
-    public void printWelt(){
-     String[][] toPrint = new String[10][10];
-     toPrint = Welt();
-     for(int i = 0; i < 10; i++){
-            for(int j = 0; j <10; j++) {
-                System.out.print(toPrint[i][j]);
-            }
-            System.out.println("");
-        }
-    }
-    
     public void findPath() {
-        
     }
-    
-    public String[][] Welt() {
-        
-        String[][] welt = new String[10][10];
-        
+
+    public boolean[][] Welt() {
+        boolean[][] map = new boolean[10][10];
         for(int i = 0; i < 10; i++){
             for(int j = 0; j <10; j++){
-                welt[i][j] = getCell(j,i);
+                map[i][j] = getCell(i,j);
             }
         }
-        welt[getY()][getX()] = "S";
-        return welt;
+        return map;
     }
-    
-    public String getCell(int x, int y) {
+
+    public boolean getCell(int x, int y) {
         int rx = getX() ;
         int ry = getY() ;
         int px = x - rx;
         int py = y - ry;
-        String number = "1";
+        boolean type = true;
         if(getOneObjectAtOffset(px,py,Huegel.class)!=null){ //Huegel = 2
-            number = "0";
+            type = false;
         }else if(getOneObjectAtOffset(px,py,Gestein.class)!=null){ //Gestein = 1
             //number = "1";
-            number = "D";
+            type = true;
         }
-        return number;
+        return type;
     }
 
     /**
@@ -200,6 +336,10 @@ public class Rover extends Actor
     public void setzeMarke()
     {
         getWorld().addObject(new Marke(), getX(), getY());
+    }
+
+    public void mark(int X, int Y){
+        getWorld().addObject(new Marke(), X, Y);
     }
 
     /**

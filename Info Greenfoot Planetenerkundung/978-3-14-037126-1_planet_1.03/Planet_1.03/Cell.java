@@ -11,56 +11,49 @@ import java.util.ArrayList;
  */
 public class Cell extends Actor
 {
-    int posx = 0;
-    int posy = 0;
-    Cell[] arr = {};
-    ArrayList<String> prev = new ArrayList<String>();
-    String UUID = "";
-    int MAXY = 9;
-    int MAXX = 9;
-    int LIMMIT = 100;
-    int current = 0;
-    public void update(Integer posX, Integer posY,Cell[] oarr,Integer nc,ArrayList<String> prevprev){
-        posx = posX;
-        posy = posY;
-        UUID = posx +""+ posy;
-        arr = oarr;
-        int X2 = posx -1;
-        current = nc;
-        prev = prevprev;
-        prev.add(UUID);
-        System.out.println(posx + " " + posy);
-        
-        
-        System.out.println(current);
-        // +1
-        int X1 = posx +1;
-        if(!(prev.contains(X1 +""+ posy))){
-            if(current < LIMMIT){
-                if(X1 < MAXX){
-                    Cell ZelleX1 = new Cell();
-                    ZelleX1.update(X1,posy,arr,current+1,prev);
-                }
-            }
-        }
-        X1 = posx -1;
-        if(!(prev.contains(X1 +""+ posy))){
-            if(current < LIMMIT){
-                if(X1 > 0){
-                    Cell ZelleX2 = new Cell();
-                    ZelleX2.update(X1,posy,arr,current+1,prev);
-                }
-            }
-        }
-        int Y1 = posy +1;
-        if(!(prev.contains(posx +""+ Y1))){
-            if(current < LIMMIT){
-                if(Y1 < MAXY){
-                    Cell ZelleY1 = new Cell();
-                    ZelleY1.update(Y1,posx,arr,current+1,prev);
-                }
-            }
-        }
+    private int f = 0;
+    private int g = 0;
+    private int h = 0;
+    private int x = 0;
+    private int y = 0;
+    int it = 0;
+    private String UID = "";
 
+    private ArrayList<Cell> parents = new ArrayList<Cell>();
+
+    public int getF(){
+        return f;
+    }
+    
+    public String getUID(){
+        return UID;
+    }
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
+    public void setCoords(int X,int Y){
+        y = Y;
+        x = X;
+        UID = x+""+y;
+    }
+
+    public void set(int G, int H){
+        g = G;
+        h = H;
+        f = g + h;
+    }
+
+    public ArrayList<Cell> getParents(){
+        return parents;
+    }
+
+    public void setParents(ArrayList<Cell> newParents){
+        parents = newParents;
     }
 }
+

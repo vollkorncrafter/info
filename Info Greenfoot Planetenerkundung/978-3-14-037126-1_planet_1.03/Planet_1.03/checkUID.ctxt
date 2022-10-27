@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=checkUID
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ checkUID\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=in
+comment1.target=boolean\ check(Cell)
+numComments=2

@@ -1,6 +1,20 @@
 #BlueJ class context
 comment0.target=Cell
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ Cell\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=posX\ posY\ oarr\ nc\ prevprev
-comment1.target=void\ update(java.lang.Integer,\ java.lang.Integer,\ Cell[],\ java.lang.Integer,\ java.util.ArrayList)
-numComments=2
+comment1.params=
+comment1.target=int\ getF()
+comment2.params=
+comment2.target=java.lang.String\ getUID()
+comment3.params=
+comment3.target=int\ getX()
+comment4.params=
+comment4.target=int\ getY()
+comment5.params=X\ Y
+comment5.target=void\ setCoords(int,\ int)
+comment6.params=G\ H
+comment6.target=void\ set(int,\ int)
+comment7.params=
+comment7.target=java.util.ArrayList\ getParents()
+comment8.params=newParents
+comment8.target=void\ setParents(java.util.ArrayList)
+numComments=9
